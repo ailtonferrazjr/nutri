@@ -35,6 +35,7 @@ pnpm db:generate      # Gerar migrations
 pnpm db:push          # Push schema pro banco
 pnpm db:seed          # Seed com perfis iniciais
 pnpm typecheck        # Type check
+pnpm test             # Vitest
 ```
 
 ## Acesso direto ao banco (CLI)
