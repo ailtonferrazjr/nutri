@@ -25,13 +25,16 @@ export function normalizeIngredientName(name: string): string {
     .trim();
 }
 
-/** True for salt, water, oil, vinegar, pepper and anything containing them. */
+/**
+ * True when any whole word of the name is a staple ("sal grosso",
+ * "azeite de oliva"). Matching on whole words keeps "salmão", "salsa" and
+ * "pimentão" from being treated as salt or pepper.
+ */
 export function isStaple(normalizedName: string): boolean {
   if (ALWAYS_AVAILABLE.has(normalizedName)) return true;
-  for (const staple of ALWAYS_AVAILABLE) {
-    if (normalizedName.includes(staple)) return true;
-  }
-  return false;
+  return normalizedName
+    .split(/[^a-z]+/)
+    .some((word) => word.length > 0 && ALWAYS_AVAILABLE.has(word));
 }
 
 /**
