@@ -1,0 +1,53 @@
+{
+  "name": "nutri",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "tsx lib/db/seed.ts",
+    "db:query": "tsx scripts/db-query.ts",
+    "mercadona:scrape": "tsx scripts/scrape-mercadona.ts",
+    "mercadona:ingest": "tsx scripts/ingest-mercadona.ts",
+    "mercadona:sync": "tsx scripts/scrape-mercadona.ts && tsx scripts/ingest-mercadona.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.69",
+    "@ai-sdk/react": "^3.0.160",
+    "@anthropic-ai/sdk": "^0.88.0",
+    "ai": "^6.0.158",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "lucide-react": "^1.8.0",
+    "next": "^16.2.3",
+    "postgres": "^3.4.9",
+    "radix-ui": "^1.4.3",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "drizzle-kit": "^0.31.10",
+    "playwright": "^1.59.1",
+    "postcss": "^8.5.9",
+    "tailwindcss": "^4.2.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  }
+}

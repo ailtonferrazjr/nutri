@@ -1,0 +1,13 @@
+node_modules/
+.next/
+.env
+.env.local
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+
+# Scraped Mercadona catalog (regenerate with pnpm mercadona:scrape)
+scripts/mercadona-data.json
+
+# Test coverage
+coverage/

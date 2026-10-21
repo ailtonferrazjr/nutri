@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="40" fill="#2d7a3a"/>
+  <g fill="none" stroke="#f5faf6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" transform="translate(90,90) scale(3.5) translate(-16,-16)">
+    <!-- fork -->
+    <path d="M10 7v4c0 1.5 1 2.5 2 2.5S14 12.5 14 11V7"/>
+    <line x1="12" y1="13.5" x2="12" y2="25"/>
+    <line x1="12" y1="7" x2="12" y2="11"/>
+    <!-- knife -->
+    <path d="M20 7c0 0-2.2 2-2.2 5.5c0 1.8 1 2.5 2.2 2.5"/>
+    <line x1="20" y1="15" x2="20" y2="25"/>
+  </g>
+</svg>
