@@ -162,25 +162,6 @@ Unit tests cover the logic that does not need a database or a model call:
 
 CI runs typecheck and tests on every push and pull request (`.github/workflows/ci.yml`).
 
-## Screenshots
-
-> TODO: add real screenshots. Planned files:
-
-- `docs/screenshots/chat.png`: agent conversation with tool calls
-- `docs/screenshots/receipt.png`: receipt scan result
-- `docs/screenshots/pantry.png`: pantry
-- `docs/screenshots/grocery.png`: grocery list with Mercadona prices
-- `docs/screenshots/week.png`: weekly meal plan
-- `docs/screenshots/discover.png`: recipe discovery feed
-
-<!--
-<p>
-  <img src="docs/screenshots/chat.png" width="250" alt="Chat" />
-  <img src="docs/screenshots/grocery.png" width="250" alt="Grocery list" />
-  <img src="docs/screenshots/week.png" width="250" alt="Weekly plan" />
-</p>
--->
-
 ## Live demo
 
 The deployed instance holds our real household data, so it is password protected and not open to the public. To try Nutri, run it locally with the steps above.
