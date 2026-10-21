@@ -10,6 +10,20 @@ import {
   insertSuggestions,
   computeMissingIngredients,
 } from "@/lib/db/queries/suggestions";
+import { extractJsonArray } from "@/lib/parse-llm-json";
+import type { RecipeIngredient } from "@/lib/ingredients/match";
+
+type GeneratedRecipe = {
+  name: string;
+  description?: string;
+  servings?: number;
+  prepMinutes?: number;
+  cookMinutes?: number;
+  ingredients: RecipeIngredient[];
+  instructions: string[];
+  tags: string[];
+  nutrition: Record<string, number>;
+};
 
 const MEAL_TYPES = ["café", "almoço", "lanche", "jantar"];
 const MEAL_TYPE_LABELS: Record<string, string> = {
@@ -109,27 +123,10 @@ async function generateForMealType(mealType: string, count: number) {
   const text =
     response.content[0].type === "text" ? response.content[0].text : "";
 
-  // Extract JSON from response
-  const jsonMatch = text.match(/\[[\s\S]*\]/);
-  if (!jsonMatch) {
-    console.error(`Falha ao parsear resposta para ${mealType}`);
+  const recipes = extractJsonArray(text) as GeneratedRecipe[] | null;
+  if (!recipes) {
+    console.error(`Falha ao parsear JSON para ${mealType}`);
     return;
-  }
-
-  let recipes;
-  try {
-    recipes = JSON.parse(jsonMatch[0]);
-  } catch {
-    // Try to fix common JSON issues (trailing commas, etc.)
-    const cleaned = jsonMatch[0]
-      .replace(/,\s*([}\]])/g, "$1") // trailing commas
-      .replace(/[\x00-\x1f]/g, " "); // control characters
-    try {
-      recipes = JSON.parse(cleaned);
-    } catch (e) {
-      console.error(`Falha ao parsear JSON para ${mealType}:`, e);
-      return;
-    }
   }
 
   const suggestions = [];

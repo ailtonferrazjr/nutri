@@ -1,6 +1,10 @@
 import { and, gte, lte, eq, desc, sql, ilike } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { mealPlan, recipes, pantryItems } from "@/lib/db/schema";
+import {
+  parseIngredientQuantity,
+  type RecipeIngredient,
+} from "@/lib/ingredients/match";
 
 export async function getWeekMealPlan(weekStart: string) {
   const start = new Date(weekStart);
@@ -146,12 +150,6 @@ export async function deleteMealPlanEntry(id: string) {
 
 // --- Pantry deduction ---
 
-type RecipeIngredient = {
-  name: string;
-  quantity?: number | string;
-  unit?: string;
-};
-
 type PantryDeduction = {
   pantryItemId: string;
   pantryItemName: string;
@@ -194,11 +192,7 @@ export async function previewPantryDeductions(recipeId: string) {
       .where(ilike(pantryItems.name, `%${ing.name}%`))
       .limit(1);
 
-    const deductQty = typeof ing.quantity === "number"
-      ? ing.quantity
-      : typeof ing.quantity === "string"
-        ? parseFloat(ing.quantity) || 1
-        : 1;
+    const deductQty = parseIngredientQuantity(ing.quantity);
 
     if (matches.length > 0) {
       const item = matches[0];
@@ -303,11 +297,7 @@ export async function deductPantryFromRecipe(recipeId: string) {
     }
 
     const item = matches[0];
-    const deductQty = typeof ing.quantity === "number"
-      ? ing.quantity
-      : typeof ing.quantity === "string"
-        ? parseFloat(ing.quantity) || 1
-        : 1;
+    const deductQty = parseIngredientQuantity(ing.quantity);
 
     const previousQty = item.quantity ?? 0;
     const newQty = previousQty - deductQty;
