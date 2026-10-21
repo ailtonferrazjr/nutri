@@ -30,7 +30,10 @@ export default function LoginPage() {
     if (res.ok) {
       window.location.href = "/";
     } else {
-      setError("Senha incorreta");
+      const data = (await res.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+      setError(data?.error ?? "Senha incorreta");
       setLoading(false);
     }
   }
