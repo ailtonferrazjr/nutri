@@ -2,7 +2,7 @@ import { generateObject } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { z } from "zod";
 
-const receiptSchema = z.object({
+export const receiptSchema = z.object({
   store: z
     .string()
     .nullable()
